@@ -25,6 +25,7 @@ LIMIT 1
 
 //look up site favicon with url
 func lookupFavicon(url string) string {
+	log.Printf("lookupFavicon %s", url)
 	if iconDB == nil {
 		home, _ := os.UserHomeDir()
 		iconDBPath := filepath.Join(home, IconDBPath)
@@ -74,20 +75,21 @@ func lookupFavicon(url string) string {
 }
 
 func downloadIcon(url, dest string) {
+	log.Printf("downloadIcon %s", url)
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf(err.Error())
 		return
 	}
 	defer resp.Body.Close()
 	file, err := os.Create(dest)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf(err.Error())
 		return
 	}
 	_, err = io.Copy(file, resp.Body)
 	if err != nil {
-		log.Println(err.Error())
+		log.Printf(err.Error())
 		return
 	}
 }

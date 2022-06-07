@@ -18,6 +18,7 @@ func init() {
 	wf = aw.New(update.GitHub(repo), aw.HelpURL(repo+"/issues"))
 	//init icon cache folder
 	iconPath := filepath.Join(wf.CacheDir(), "/favicons")
+	log.Printf("init icon cache %s", iconPath)
 	if _, err := os.Stat(iconPath); os.IsNotExist(err) {
 		os.Mkdir(iconPath, os.ModePerm)
 	}
